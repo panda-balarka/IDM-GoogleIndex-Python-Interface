@@ -1,8 +1,16 @@
+''' 
+Tkinter interface to download files from the main index link from google search
+
+- panda_inline4
+'''
+
+# import the required libraries
 import tkinter as tk
 from tkinter import ttk
 from idm_dwn import *
 
 
+# Gui class
 class Gui_Main(tk.Frame):
     
     def __init__(self,parent):
