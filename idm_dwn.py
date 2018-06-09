@@ -1,17 +1,27 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue May  1 13:01:27 2018
+''' 
+Download the files from sublinks in the main index link. Usefull to download whole seasons of serialtrons, pdf collections, etc.
+Rusn the IDM downloader for all the files in one go. :D
 
-@author: a
-"""
+- panda_inline4
+'''
+
+# import required libraries
 import urllib.request
 import lxml.html
 import os
 
+# have a counter variable incase the download is done with Series name of user choice
 global seriesIndex_v
 seriesIndex_v = 1
 
+
 def get_links(home_url,destination_path,string_seriesName):
+        """ 
+        Function to extract the file sublinks from the main index link provided. Then call the interface method 
+        to initiate the download from IDM manager silently
+        """
+        
+        # establish the connection to main index link
         connection = urllib.request.urlopen(home_url)
         dom =  lxml.html.fromstring(connection.read())
         links = []
@@ -26,6 +36,9 @@ def get_links(home_url,destination_path,string_seriesName):
                 download_from_idm(link,destination_path,string_seriesName)
 
 def download_from_idm(url,destination_path,string_seriesName):
+        """
+        Check if the file to be downloaded already exists, else start the download of the file via IDM manager
+        """
         idm_path = 'idman'
         if string_seriesName:
             global seriesIndex_v
